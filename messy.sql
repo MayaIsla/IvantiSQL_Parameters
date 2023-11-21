@@ -107,4 +107,5 @@ LEFT OUTER JOIN ServiceReqParam ON (
 LEFT JOIN [FusionAttachments] att ON att.RecID = ServiceReqParam.ParameterValue
 AND ParameterValue NOT LIKE '%<style%'
 LEFT JOIN [Frs_def_validation_lists] val ON val.RecID = ServiceReqTemplateParam.ValidationList_RecID
-WHERE (ServiceReq.ServiceReqNumber = ('')) AND ServiceReqTemplateParam.DisplayName IS NOT NULL
+WHERE (ServiceReqParam.ParentLink_RecID = (@RecID)) AND (ParameterValue IS NOT NULL) AND (ParameterValue NOT LIKE '%<%') AND (ServiceReqTemplateParam.DisplayName IS NOT NULL)
+ORDER BY ServiceReqTemplateParam.SequenceNum
